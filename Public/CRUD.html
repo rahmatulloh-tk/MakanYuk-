@@ -138,6 +138,11 @@
 
         if (!isValid) {
           event.preventDefault();
+        } else {
+          event.preventDefault();
+          alert("Terima kasih sudah berdonasi, semoga sehat selalu!");
+          document.getElementById("donationForm").reset();
+          document.getElementById("preview").src = "https://via.placeholder.com/150";
         }
       });
     </script>
