@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Navigasi */
+.nav-link {
+    @apply mx-4 text-gray-700 hover:text-blue-600;
+}
+
+/* Tombol utama */
+.btn-primary {
+    @apply bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700;
+}
+
+/* Judul setiap section */
+.section-title {
+    @apply text-2xl font-bold text-gray-800;
+}
+
+/* Langkah-langkah donasi (lingkaran) */
+.circle-step {
+    @apply w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center;
+}
+
+/* Overlay header */
+.overlay {
+    @apply absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center text-white text-center p-4;
+}
+
+/* Box ulasan */
+.review-box {
+    @apply w-40 h-40 bg-white shadow-lg rounded-lg;
+}
