@@ -22,7 +22,7 @@
     <!-- Navigasi -->
     <nav class="bg-white shadow-md p-4 flex justify-between items-center">
         <div class="flex items-center gap-2">
-            <img src="<?php echo 'http://localhost/MakanYuk-/src/Images/LogoBiru.png'; ?>" alt="Logo" class="h-10">
+            <img src="<?php echo 'http://localhost/MakanYuk/src/Images/LogoBiru.png'; ?>" alt="Logo" class="h-10">
             <span class="font-bold text-lg text-blue-700">MakanYuk!</span>
         </div>
         <div>
@@ -37,7 +37,7 @@
     
     <!-- Header dengan Gambar Latar Belakang Fullsize -->
     <header class="relative w-full h-screen">
-        <img src="<?php echo 'http://localhost/MakanYuk-/src/Images/Backround.png'; ?>" alt="Header" class="absolute top-0 left-0 w-full h-full object-cover">
+        <img src="<?php echo 'http://localhost/MakanYuk/src/Images/Backround.png'; ?>" alt="Header" class="absolute top-0 left-0 w-full h-full object-cover">
         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white text-center px-4">
             <h1 class="text-4xl font-bold">MakanYuk! – Berbagi Makanan, Peduli Sesama</h1>
             <p class="mt-4 text-lg max-w-2xl">Bersama kita bisa mengurangi kelaparan dengan berbagi makanan kepada mereka yang membutuhkan.</p>
