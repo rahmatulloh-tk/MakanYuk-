@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Navigasi */
 .nav-link {
-    @apply mx-4 text-gray-700 hover:text-blue-600;
+    @apply mx-4 text-gray-700 font-bold duration-300 hover:text-blue-600;
 }
 
 /* Tombol utama */
@@ -16,6 +17,26 @@
 .section-title {
     @apply text-2xl font-bold text-gray-800;
 }
+
+@layer components {
+    .bg-bluePrimary {
+      background-color: #0066cc;
+    }
+    .bg-bluePrimary_hover:hover {
+      background-color: #005bb5;
+    }
+    .bg-orangePrimary {
+      background-color: #ff7f32;
+    }
+    .bg-softYellow {
+      background-color: #fffbdd;
+    }
+    .bg-white2 {
+      background-color: #fdfdfd;
+    }
+  }
+  
+  
 
 /* Langkah-langkah donasi (lingkaran) */
 .circle-step {
