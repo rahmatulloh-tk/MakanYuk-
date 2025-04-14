@@ -13,30 +13,31 @@ if ($conn->connect_error) {
 $notif = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nama_donatur = $_POST['nama_donatur'];
-    $kategori_makanan = $_POST['kategori_makanan'];
     $nama_makanan = $_POST['nama_makanan'];
-    $deskripsi_makanan = $_POST['deskripsi_makanan'];
-    $jumlah = $_POST['jumlah'];
+    $kategori = $_POST['kategori'];
+    $deskripsi = $_POST['deskripsi'];
     $lokasi = $_POST['lokasi'];
-    
-    // Handle file upload 
+    $jumlah = $_POST['jumlah'];
+    $kadaluarsa = $_POST['kadaluarsa'];
+    $status_halal = $_POST['status_halal'];
+
+    // Upload foto
     $foto = $_FILES['foto'];
     $foto_name = $foto['name'];
     $foto_tmp = $foto['tmp_name'];
     $foto_size = $foto['size'];
     $foto_ext = pathinfo($foto_name, PATHINFO_EXTENSION);
     $allowed_ext = ['png', 'jpg', 'jpeg'];
-    $max_size = 4 * 1024 * 1024; // 4MB
-    
+    $max_size = 4 * 1024 * 1024;
+
     if (!in_array($foto_ext, $allowed_ext) || $foto_size > $max_size) {
         $_SESSION['error'] = "Format foto tidak valid atau ukuran terlalu besar.";
     } else {
         $new_foto_name = time() . "." . $foto_ext;
         move_uploaded_file($foto_tmp, "uploads/" . $new_foto_name);
-        
-        $stmt = $conn->prepare("INSERT INTO form_donasi (nama_donatur, kategori_makanan, nama_makanan, deskripsi_makanan, jumlah, lokasi, foto) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssiss", $nama_donatur, $kategori_makanan, $nama_makanan, $deskripsi_makanan, $jumlah, $lokasi, $new_foto_name);
+
+        $stmt = $conn->prepare("INSERT INTO form_donasi (nama_makanan, kategori, deskripsi, lokasi, jumlah, kadaluarsa, status_halal, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssisss", $nama_makanan, $kategori, $deskripsi, $lokasi, $jumlah, $kadaluarsa, $status_halal, $new_foto_name);
         $stmt->execute();
         $stmt->close();
         $_SESSION['success'] = "Donasi berhasil ditambahkan.";
@@ -53,12 +54,13 @@ if (isset($_SESSION['success'])) {
     unset($_SESSION['error']);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Donasi Makanan</title>
+    <title>Form Donasi - Makanyuk!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         function showNotification() {
@@ -74,9 +76,19 @@ if (isset($_SESSION['success'])) {
         };
     </script>
 </head>
-<body class="bg-gray-100 p-6">
-    <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
-        <h2 class="text-2xl font-bold mb-4">Tambah Donasi Makanan</h2>
+<body class="bg-[#FFFCF5] font-sans">
+
+    <!-- Header -->
+    <header class="bg-[#0C356A] py-4 px-6 flex items-center justify-between shadow">
+        <div class="flex items-center space-x-4">
+            <img src="<?php echo 'http://localhost/MakanYuk-/src/Images/LogoKuning.png'; ?>" alt= "Logo Makanyuk" class="h-10 w-10 object-cover">
+            <h1 class="text-white font-bold text-xl">Makanyuk!</h1>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto py-10 px-6 bg-white rounded-xl shadow">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Mari Berbagi, Satu Porsi untuk Kebahagiaan</h1>
+        <p class="text-gray-700 mb-8">Hai, terima kasih sudah mau berbagi! Dengan sedikit bantuan dari Anda, kita bisa membuat perbedaan besar bagi mereka yang membutuhkan. Yuk, isi informasi dengan lengkap supaya donasi ini bisa sampai ke tangan yang tepat!</p>
 
         <div id="notif" class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center <?= $notif ? '' : 'hidden'; ?>">
             <div class="bg-white p-6 rounded shadow-lg text-center">
@@ -86,34 +98,59 @@ if (isset($_SESSION['success'])) {
             </div>
         </div>
 
-        <form action="" method="post" enctype="multipart/form-data">
-            <label class="block mb-2">Nama</label>
-            <input type="text" name="nama_donatur" class="w-full p-2 border rounded mb-4" required>
-            
-            <label class="block mb-2">Kategori Makanan</label>
-            <select name="kategori_makanan" class="w-full p-2 border rounded mb-4" required>
-                <option value="" disabled selected>Pilih Kategori</option>
-                <option value="Makanan Kering">Makanan Kering</option>
-                <option value="Makanan Basah">Makanan Basah</option>
-                <option value="Minuman">Minuman</option>
-            </select>
-            
-            <label class="block mb-2">Nama Makanan</label>
-            <input type="text" name="nama_makanan" class="w-full p-2 border rounded mb-4" required>
-            
-            <label class="block mb-2">Deskripsi Makanan</label>
-            <textarea name="deskripsi_makanan" class="w-full p-2 border rounded mb-4" required></textarea>
-            
-            <label class="block mb-2">Jumlah</label>
-            <input type="number" name="jumlah" class="w-full p-2 border rounded mb-4" min="1" required>
-            
-            <label class="block mb-2">Lokasi</label>
-            <input type="text" name="lokasi" class="w-full p-2 border rounded mb-4" required>
-            
-            <label class="block mb-2">Foto Makanan (PNG/JPG, maks 4MB)</label>
-            <input type="file" name="foto" class="w-full p-2 border rounded mb-4" accept="image/png, image/jpg, image/jpeg" required>
-            
-            <button type="submit" class="w-full bg-blue-900 text-white p-2 rounded">Tambah Donasi</button>
+        <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <div>
+                <label class="block font-semibold mb-1">Nama Makanan</label>
+                <input type="text" name="nama_makanan" placeholder="Masukkan Nama Makanan" class="w-full p-3 border rounded bg-gray-100" required>
+            </div>
+
+            <div>
+                <label class="block font-semibold mb-1">Kategori</label>
+                <select name="kategori" class="w-full p-3 border rounded bg-gray-100" required>
+                    <option value="" disabled selected>Pilih Kategori</option>
+                    <option value="Makanan Kering">Makanan Kering</option>
+                    <option value="Makanan Basah">Makanan Basah</option>
+                    <option value="Minuman">Minuman</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block font-semibold mb-1">Deskripsi Makanan</label>
+                <textarea name="deskripsi" placeholder="Masukkan Deskripsi Makanan" class="w-full p-3 border rounded bg-gray-100" required></textarea>
+            </div>
+
+            <div>
+                <label class="block font-semibold mb-1">Lokasi</label>
+                <input type="text" name="lokasi" placeholder="Masukkan Lokasi Anda" class="w-full p-3 border rounded bg-gray-100" required>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-semibold mb-1">Jumlah</label>
+                    <input type="number" name="jumlah" placeholder="Masukkan Jumlah Makanan" class="w-full p-3 border rounded bg-gray-100" required min="1">
+                </div>
+                <div>
+                    <label class="block font-semibold mb-1">Tanggal Kadaluarsa</label>
+                    <input type="date" name="kadaluarsa" class="w-full p-3 border rounded bg-gray-100" required>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-6">
+                <label class="font-semibold">Status:</label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="status_halal" value="Halal" class="mr-2" required> Halal
+                </label>
+                <label class="inline-flex items-center">
+                    <input type="radio" name="status_halal" value="Non Halal" class="mr-2"> Non Halal
+                </label>
+            </div>
+
+            <div>
+                <label class="block font-semibold mb-1">Masukkan Foto</label>
+                <input type="file" name="foto" accept="image/png, image/jpg, image/jpeg" class="w-full p-3 border rounded bg-gray-100" required>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded text-lg hover:bg-blue-800 transition">Tambah Donasi</button>
         </form>
     </div>
 </body>
