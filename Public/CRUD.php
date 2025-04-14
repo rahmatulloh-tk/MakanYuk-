@@ -81,8 +81,8 @@ if (isset($_SESSION['success'])) {
     <!-- Header -->
     <header class="bg-[#0C356A] py-4 px-6 flex items-center justify-between shadow">
         <div class="flex items-center space-x-4">
-            <img src="<?php echo 'http://localhost/MakanYuk-/src/Images/LogoKuning.png'; ?>" alt= "Logo Makanyuk" class="h-10 w-10 object-cover">
-            <h1 class="text-white font-bold text-xl">Makanyuk!</h1>
+            <img src="<?php echo 'http://localhost/MakanYuk/src/Images/LogoKuning.png'; ?>" alt= "Logo Makanyuk" class="h-10 w-10 object-cover">
+            <h1 class="text-white font-bold text-2xl">MakanYuk!</h1>
         </div>
     </header>
 
