@@ -33,15 +33,15 @@ require 'cek.php';
                                 Dashboard
                             </a>
                             <a class="nav-link" href="user.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                 User
                             </a>
                             <a class="nav-link" href="donasi.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-hand-holding-heart"></i></div>
                                 Donasi
                             </a>
                             <a class="nav-link" href="penerima_donasi.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 Penerima Donasi
                             </a>
                             <a class="nav-link" href="logout.php">
@@ -107,12 +107,7 @@ require 'cek.php';
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            <div class="text-muted">Copyright © Makanyuk 2025</div>
                         </div>
                     </div>
                 </footer>
