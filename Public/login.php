@@ -11,7 +11,7 @@
 
     <!-- Kiri: Logo & Slogan -->
     <div class="md:w-1/2 bg-yellow-100 flex flex-col items-center justify-center p-10">
-      <img src="src/Images/LogoBiru.png" alt="Logo MakanYuk" class="w-28 mb-4">
+    <img src="<?php echo 'http://localhost/MakanYuk/src/Images/LogoBiru.png'; ?>" alt="Logo" class="w-28 mb-4">
       <h1 class="text-3xl font-bold text-gray-800 mb-2">MakanYuk!</h1>
       <p class="text-gray-700 text-center font-medium">Berbagi Makanan, Peduli Sesama</p>
     </div>

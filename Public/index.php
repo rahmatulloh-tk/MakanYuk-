@@ -68,7 +68,7 @@
       <a href="#kontak" class="nav-link">Kontak</a>
 
       <!-- Tombol Daftar -->
-      <a href="#daftar" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full shadow-md">
+      <a href="login.php" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full shadow-md">
         Daftar
       </a>
     </div>
