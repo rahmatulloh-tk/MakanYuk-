@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$conn = mysqli_connect("localhost","root","","db_makanyukk");
+$conn = mysqli_connect("localhost","root","","db_makanyuk");
 
 if(!$conn){
 	echo "Koneksi gagal";
