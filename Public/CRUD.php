@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $new_foto_name = time() . "." . $foto_ext;
         move_uploaded_file($foto_tmp, "uploads/" . $new_foto_name);
 
-        $stmt = $conn->prepare("INSERT INTO form_donasi (nama_makanan, kategori, deskripsi, lokasi, jumlah, kadaluarsa, status_halal, foto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO donasi (nama_makanan, kategori, deskripsi_makanan, alamat, jumlah, kadaluwarsa, halal, gambar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssisss", $nama_makanan, $kategori, $deskripsi, $lokasi, $jumlah, $kadaluarsa, $status_halal, $new_foto_name);
         $stmt->execute();
         $stmt->close();
@@ -116,12 +116,12 @@ if (isset($_SESSION['success'])) {
 
             <div>
                 <label class="block font-semibold mb-1">Deskripsi Makanan</label>
-                <textarea name="deskripsi" placeholder="Masukkan Deskripsi Makanan" class="w-full p-3 border rounded bg-gray-100" required></textarea>
+                <textarea name="deskripsi_makanan" placeholder="Masukkan Deskripsi Makanan" class="w-full p-3 border rounded bg-gray-100" required></textarea>
             </div>
 
             <div>
                 <label class="block font-semibold mb-1">Lokasi</label>
-                <input type="text" name="lokasi" placeholder="Masukkan Lokasi Anda" class="w-full p-3 border rounded bg-gray-100" required>
+                <input type="text" name="alamat" placeholder="Masukkan Lokasi Anda" class="w-full p-3 border rounded bg-gray-100" required>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -131,23 +131,23 @@ if (isset($_SESSION['success'])) {
                 </div>
                 <div>
                     <label class="block font-semibold mb-1">Tanggal Kadaluarsa</label>
-                    <input type="date" name="kadaluarsa" class="w-full p-3 border rounded bg-gray-100" required>
+                    <input type="date" name="kadaluwarsa" class="w-full p-3 border rounded bg-gray-100" required>
                 </div>
             </div>
 
             <div class="flex items-center space-x-6">
                 <label class="font-semibold">Status:</label>
                 <label class="inline-flex items-center">
-                    <input type="radio" name="status_halal" value="Halal" class="mr-2" required> Halal
+                    <input type="radio" name="halal" value="Halal" class="mr-2" required> Halal
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="radio" name="status_halal" value="Non Halal" class="mr-2"> Non Halal
+                    <input type="radio" name="halal" value="Non Halal" class="mr-2"> Non Halal
                 </label>
             </div>
 
             <div>
                 <label class="block font-semibold mb-1">Masukkan Foto</label>
-                <input type="file" name="foto" accept="image/png, image/jpg, image/jpeg" class="w-full p-3 border rounded bg-gray-100" required>
+                <input type="file" name="gambar" accept="image/png, image/jpg, image/jpeg" class="w-full p-3 border rounded bg-gray-100" required>
             </div>
 
             <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded text-lg hover:bg-blue-800 transition">Tambah Donasi</button>
