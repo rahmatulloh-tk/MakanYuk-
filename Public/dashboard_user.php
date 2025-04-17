@@ -42,7 +42,7 @@ $result = $conn->query($query);
              Donasi
         </a>
         <!-- Logout -->
-        <a href="#" class="text-white hover:underline">Logout</a>
+        <a href="index.php" class="text-white hover:underline">Logout</a>
     </div>
 </header>
 
@@ -54,7 +54,7 @@ $result = $conn->query($query);
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <div class="bg-white rounded-xl shadow hover:shadow-lg transition cursor-pointer" onclick='showDetail(<?= json_encode($row); ?>)'>
-                        <img src="src/uploads/<?= htmlspecialchars($row['foto']); ?>" alt="Foto Makanan" class="w-full h-40 object-cover rounded-t-xl">
+                    <img src="/MakanYuk/Public/admin/uploads/<?php echo $row['gambar']; ?>" alt="Foto Makanan" class="w-full h-40 object-cover rounded-t-xl">
                         <div class="p-4">
                             <h3 class="text-lg font-semibold"><?= htmlspecialchars($row['nama_makanan']); ?></h3>
                             <p class="text-gray-600 text-sm mt-1"><?= htmlspecialchars($row['alamat']); ?></p>
@@ -95,7 +95,7 @@ $result = $conn->query($query);
             document.getElementById("modalKadaluarsa").innerText = new Date(data.kadaluwarsa).toLocaleDateString();
             document.getElementById("modalDonatur").innerText = data.nama_user;
             document.getElementById("modalAlamat").innerText = data.alamat;
-            document.getElementById("modalFoto").src = "src/uploads/" + data.foto;
+            document.getElementById("modalFoto").src = "/MakanYuk/Public/admin/uploads/" + data.foto;
 
             document.getElementById("detailModal").classList.remove("hidden");
             document.getElementById("detailModal").classList.add("flex");
