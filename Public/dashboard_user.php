@@ -30,16 +30,21 @@ $result = $conn->query($query);
 </head>
 <body class="bg-gray-100 min-h-screen">
 
-    <!-- Header -->
-    <header class="bg-[#0C356A] py-4 px-6 flex items-center justify-between shadow-md">
-        <div class="flex items-center space-x-4">
-            <img src="http://localhost/MakanYuk/src/Images/LogoKuning.png" alt="Logo Makanyuk" class="h-10 w-10 object-cover">
-            <h1 class="text-white font-bold text-2xl">MakanYuk!</h1>
-        </div>
-        <div>
-            <a href="#" class="text-white hover:underline">Logout</a>
-        </div>
-    </header>
+   <!-- Header -->
+<header class="bg-[#0C356A] py-4 px-6 flex items-center justify-between shadow-md">
+    <div class="flex items-center space-x-4">
+        <img src="http://localhost/MakanYuk/src/Images/LogoKuning.png" alt="Logo Makanyuk" class="h-10 w-10 object-cover">
+        <h1 class="text-white font-bold text-2xl">MakanYuk!</h1>
+    </div>
+    <div class="flex items-center space-x-4">
+        <!-- Tombol Donasi -->
+        <a href="CRUD.php" class="bg-yellow-400 hover:bg-yellow-500 text-[#0C356A] font-semibold px-4 py-2 rounded-full shadow">
+             Donasi
+        </a>
+        <!-- Logout -->
+        <a href="#" class="text-white hover:underline">Logout</a>
+    </div>
+</header>
 
     <!-- Main Content -->
     <main class="p-6 max-w-7xl mx-auto">
