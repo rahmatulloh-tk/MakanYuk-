@@ -1,18 +1,20 @@
 <?php
 session_start();
-include 'koneksi.php'; // File koneksi database
+include 'koneksi.php'; // File koneksi ke database
+
+$error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    
+
     $query = "SELECT * FROM admin WHERE username = ? LIMIT 1";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
-    
+
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['admin'] = $user['username'];
         header("Location: dashboard_admin.php");
@@ -28,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - MakanYuk!</title>
+    <title>Login Admin - MakanYuk!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -78,14 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 5px;
             cursor: pointer;
         }
-        .footer {
-            margin-top: 10px;
-            font-size: 12px;
-        }
-        .footer a {
-            color: #ff6600;
-            text-decoration: none;
-        }
         .btn-back {
             width: 100%;
             padding: 10px;
@@ -107,12 +101,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <div class="logo">MakanYuk!</div>
         <form action="login_admin.php" method="POST">
-            <?php if(isset($error)) { echo '<div class="error">'.$error.'</div>'; } ?>
+            <?php if (!empty($error)) { echo '<div class="error">' . $error . '</div>'; } ?>
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit" class="btn">Login</button>
         </form>
-        <button onclick="window.location.href='dashboard_admin.php'" class="btn-back">Kembali</button>
+        <button onclick="window.location.href='index.php'" class="btn-back">Kembali ke Beranda</button>
     </div>
 </body>
 </html>
