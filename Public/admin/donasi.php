@@ -93,7 +93,7 @@ require 'cek.php';
                                         <td><?= $d['halal']; ?></td>
                                         <td><?= $d['kadaluwarsa']; ?></td>
                                         <td><?= $d['alamat']; ?></td>
-                                        <td><?= $d['alamat']; ?></td>
+                            
                                         <td>
                                             <img src="images/<?= $d['gambar']; ?>" width="100">
                                         </td>
